@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface MessageRepository {
 
-    void sendMessage(User user, Message message);
+    void sendMessage(Message message);
 
     List<Message> getAllMessages(User user);
+
+    default void persistData() {throw new UnsupportedOperationException();};
 }

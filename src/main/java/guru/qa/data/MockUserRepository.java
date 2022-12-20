@@ -15,10 +15,15 @@ public class MockUserRepository implements UserRepository {
             User user1 = new User("svasenkov", 5002, new SecurityService().calculateHash(password));
             User user2 = new User("arteme", 5003, new SecurityService().calculateHash(password));
             user0.addUsersToContactList(user1, user2);
+            user1.addUsersToContactList(user0);
 
             if (userName.equals("dtuchs")) {
                 return Optional.of(user0);
-            } else {
+            } else if (userName.equals("svasenkov")) {
+                return Optional.of(user1);
+            } else if (userName.equals("arteme")) {
+                return Optional.of(user2);
+            }else {
                 return Optional.empty();
             }
         } catch (NoSuchAlgorithmException e) {
@@ -28,6 +33,6 @@ public class MockUserRepository implements UserRepository {
 
     @Override
     public Optional<User> findUserByIcqNumber(String userName) {
-        return Optional.empty();
+        return null;
     }
 }

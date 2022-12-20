@@ -9,7 +9,6 @@ public class User {
     private final String userName;
     private final int icqNumber;
     private final byte[] passwordHash;
-
     private final List<User> contactList;
 
     public User(String userName, int icqNumber, byte[] passwordHash) {
