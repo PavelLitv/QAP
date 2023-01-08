@@ -1,4 +1,4 @@
-package guru.qa.data.database;
+package guru.qa.data;
 
 import org.postgresql.ds.PGSimpleDataSource;
 

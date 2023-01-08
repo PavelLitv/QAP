@@ -6,16 +6,30 @@ import java.util.List;
 
 public class User {
 
+    private final int id;
     private final String userName;
     private final int icqNumber;
     private final byte[] passwordHash;
     private final List<User> contactList;
 
     public User(String userName, int icqNumber, byte[] passwordHash) {
+        this.id = 0;
         this.userName = userName;
         this.icqNumber = icqNumber;
         this.passwordHash = passwordHash;
         this.contactList = new ArrayList<>();
+    }
+
+    public User(int id, String userName, int icqNumber, byte[] passwordHash) {
+        this.id = id;
+        this.userName = userName;
+        this.icqNumber = icqNumber;
+        this.passwordHash = passwordHash;
+        contactList = new ArrayList<>();
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getUserName() {
@@ -34,7 +48,9 @@ public class User {
         return contactList;
     }
 
-    public void addUsersToContactList(User... users) {
+    public User addUsersToContactList(User... users) {
         this.contactList.addAll(Arrays.asList(users));
+
+        return this;
     }
 }

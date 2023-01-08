@@ -2,7 +2,7 @@ CREATE TABLE users
 (
     id         SERIAL PRIMARY KEY,
     user_name  character varying(255) unique NOT NULL,
-    password   character varying(255)        NOT NULL,
+    password   bytea                         NOT NULL,
     icq_number int unique                    NOT NULL
 );
 
@@ -15,23 +15,23 @@ CREATE TABLE contacts
 CREATE TABLE messages
 (
     id            SERIAL PRIMARY KEY,
-    from_user_id  int NOT NULL,
-    to_user_id    int NOT NULL,
+    from_user_icq int NOT NULL,
+    to_user_icq   int NOT NULL,
     value_message character varying(1000),
     creation_date timestamptz
 );
 
 insert into users (id, user_name, password, icq_number)
-values (default, 'pavel', 'xe10adc3949ba59abbe56e057f20f883e', 1000);
+values (default, 'pavel', E'\\xE10ADC3949BA59ABBE56E057F20F883E', 1000);
 
 insert into users (id, user_name, password, icq_number)
-values (default, 'dmitrii', 'xe10adc3949ba59abbe56e057f20f883e', 1001);
+values (default, 'dmitrii', E'\\xE10ADC3949BA59ABBE56E057F20F883E', 1001);
 
 insert into users (id, user_name, password, icq_number)
-values (default, 'stas', 'xe10adc3949ba59abbe56e057f20f883e', 1002);
+values (default, 'stas', E'\\xE10ADC3949BA59ABBE56E057F20F883E', 1002);
 
 insert into users (id, user_name, password, icq_number)
-values (default, 'artem', 'xe10adc3949ba59abbe56e057f20f883e', 1003);
+values (default, 'artem', E'\\xE10ADC3949BA59ABBE56E057F20F883E', 1003);
 
 insert into contacts (user_id, contact_id)
 values (1, 2);
@@ -45,11 +45,17 @@ values (2, 4);
 insert into contacts (user_id, contact_id)
 values (2, 1);
 
-INSERT INTO messages (id, from_user_id, to_user_id, value_message, creation_date)
-values (default, 1, 2, 'привет, я сделал ДЗ, глянешь мой код?', '2023-01-06 10:23:04+05');
+insert into contacts (user_id, contact_id)
+values (1, 3);
 
-INSERT INTO messages (id, from_user_id, to_user_id, value_message, creation_date)
-values (default, 2, 1, 'привет, глянул - обыкновенный гавнокод', '2023-01-06 12:35:54+07');
+INSERT INTO messages (id, from_user_icq, to_user_icq, value_message, creation_date)
+values (default, 1000, 1001, 'привет, я сделал ДЗ, глянешь мой код?', '2023-01-06 10:23:04+05');
 
-INSERT INTO messages (id, from_user_id, to_user_id, value_message, creation_date)
-values (default, 1, 2, 'спасибо, бро!', '2023-01-06 10:44:34+05');
+INSERT INTO messages (id, from_user_icq, to_user_icq, value_message, creation_date)
+values (default, 1001, 1000, 'привет, глянул - обыкновенный гавнокод', '2023-01-06 12:35:54+07');
+
+INSERT INTO messages (id, from_user_icq, to_user_icq, value_message, creation_date)
+values (default, 1000, 1001, 'спасибо, бро!', '2023-01-06 10:44:34+05');
+
+INSERT INTO messages (id, from_user_icq, to_user_icq, value_message, creation_date)
+values (default, 1000, 1002, 'qa.guru это круто!', '2023-01-06 11:44:34+05');
