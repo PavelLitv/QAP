@@ -48,6 +48,18 @@ values (2, 1);
 insert into contacts (user_id, contact_id)
 values (1, 3);
 
+insert into contacts (user_id, contact_id)
+values (3, 1);
+
+insert into contacts (user_id, contact_id)
+values (3, 2);
+
+insert into contacts (user_id, contact_id)
+values (4, 1);
+
+insert into contacts (user_id, contact_id)
+values (1, 4);
+
 INSERT INTO messages (id, from_user_icq, to_user_icq, value_message, creation_date)
 values (default, 1000, 1001, 'привет, я сделал ДЗ, глянешь мой код?', '2023-01-06 10:23:04+05');
 
@@ -58,4 +70,7 @@ INSERT INTO messages (id, from_user_icq, to_user_icq, value_message, creation_da
 values (default, 1000, 1001, 'спасибо, бро!', '2023-01-06 10:44:34+05');
 
 INSERT INTO messages (id, from_user_icq, to_user_icq, value_message, creation_date)
-values (default, 1000, 1002, 'qa.guru это круто!', '2023-01-06 11:44:34+05');
+values (default, 1000, 1002, 'qa.guru это круто!', '2023-01-06 11:44:45+05');
+
+INSERT INTO messages (id, from_user_icq, to_user_icq, value_message, creation_date)
+values (default, 1000, 1003, 'allure огонь!', '2023-01-06 13:11:30+05');
