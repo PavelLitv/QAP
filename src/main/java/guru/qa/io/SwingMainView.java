@@ -4,26 +4,16 @@ import guru.qa.data.MessageRepository;
 import guru.qa.domain.Message;
 import guru.qa.domain.User;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.table.JTableHeader;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
 import java.util.stream.Collectors;
 
-import static javax.swing.JOptionPane.DEFAULT_OPTION;
-import static javax.swing.JOptionPane.PLAIN_MESSAGE;
-import static javax.swing.JOptionPane.YES_NO_OPTION;
-import static javax.swing.JOptionPane.YES_OPTION;
+import static javax.swing.JOptionPane.*;
 
 public class SwingMainView implements MainView {
     private static final int NUM_COLUMNS_FOR_CONTACTS = 2;
@@ -50,8 +40,9 @@ public class SwingMainView implements MainView {
 
     @Override
     public void showMainFrame(User user, int initContactPosition) {
-        JPanel frame = new JPanel();
-        JTextArea messageHistory = new JTextArea(50, 1);
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        JTextArea messageHistory = new JTextArea(30, 1);
         Object[] header = getContactListHeader();
         Object[][] data = getContactListData(user);
         JTable contactsTable = new JTable(data, header);
@@ -63,25 +54,23 @@ public class SwingMainView implements MainView {
                 int icq = getIcqNumberFromSelectedRowInTable(data, rowIndex);
                 String messages = getAllMessageHistory(user, icq);
                 messageHistory.setText(messages);
-                frame.revalidate();
-                frame.repaint();
+                panel.revalidate();
+                panel.repaint();
             }
         });
-
 
         messageHistory.setText(getAllMessageHistory(user, getIcqNumberFromSelectedRowInTable(data, initContactPosition)));
         JLabel inputLabel = new JLabel("Ваше сообщение: ");
         JTextField inputMessageField = new JTextField(50);
 
-        frame.add(messageHistory);
-        frame.add(contactsTable);
-        frame.add(inputLabel);
-        frame.add(inputMessageField);
-
+        panel.add(messageHistory, BorderLayout.NORTH);
+        panel.add(contactsTable, BorderLayout.SOUTH);
+        panel.add(inputLabel, BorderLayout.WEST);
+        panel.add(inputMessageField, BorderLayout.EAST);
 
         int selectedButton = JOptionPane.showOptionDialog(
                 null,
-                frame,
+                panel,
                 APP_NAME,
                 YES_NO_OPTION,
                 PLAIN_MESSAGE,

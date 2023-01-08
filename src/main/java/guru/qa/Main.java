@@ -1,8 +1,6 @@
 package guru.qa;
 
-import guru.qa.data.FileMessageRepository;
-import guru.qa.data.MockMessageRepository;
-import guru.qa.data.MockUserRepository;
+import guru.qa.data.*;
 import guru.qa.io.SwingLoginView;
 import guru.qa.io.SwingMainView;
 import guru.qa.service.Application;
@@ -15,11 +13,11 @@ public class Main {
                 new SwingLoginView(
                         new MainUserService(
                                 new SecurityService(),
-                                new MockUserRepository()
+                                new DataBaseUserRepository()
                         )
                 ),
                 new SwingMainView(
-                        new FileMessageRepository()
+                        new DataBaseMessageRepository()
                 )
         ).run();
     }
